@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#172554">
+  <title>Digital Perpus — Perpustakaan Digital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" data-nav="home"><span class="brand-mark">DP</span><span>Digital<span class="brand-light">Perpus</span></span></a>
+    <label class="header-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Cari judul buku atau penulis..." aria-label="Cari buku"></label>
+    <button class="avatar-button" id="headerAvatar" aria-label="Buka profil">👤</button>
+  </header>
+
+  <div id="welcomeOverlay" class="welcome-overlay" aria-modal="true" role="dialog" aria-labelledby="welcomeTitle">
+    <section class="welcome-card">
+      <button id="closeWelcome" class="icon-close" aria-label="Tutup panduan">×</button>
+      <div class="welcome-art"><span class="art-spark spark-one">✦</span><span class="art-book">📚</span><span class="art-spark spark-two">✧</span></div>
+      <div class="step-label" id="welcomeStep">SELAMAT DATANG · 1 DARI 4</div>
+      <h1 id="welcomeTitle">Welcome Digital Perpus!</h1>
+      <p id="welcomeText">Temukan bacaan baru, bagikan buku digital, dan bangun perpustakaanmu sendiri.</p>
+      <div class="step-dots" id="stepDots"><span class="active"></span><span></span><span></span><span></span></div>
+      <div class="welcome-actions"><button id="skipWelcome" class="btn btn-quiet">Lewati panduan</button><button id="nextWelcome" class="btn btn-primary">Berikutnya <span>→</span></button></div>
+    </section>
+  </div>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="side-caption">MENU PERPUSTAKAAN</div>
+      <button class="nav-item active" data-nav="home"><span>⌂</span> Home</button>
+      <button class="nav-item" data-nav="search"><span>⌕</span> Cari Buku</button>
+      <button class="nav-item" data-nav="favorites"><span>♡</span> Favorite Books <span id="favoriteCount" class="nav-count">0</span></button>
+      <div class="side-caption side-caption-spaced">AKUN SAYA</div>
+      <button class="nav-item" data-nav="upload"><span>＋</span> Upload Buku PDF</button>
+      <button class="nav-item" data-nav="profile"><span>◎</span> Profil Saya</button>
+      <div class="sidebar-note"><span>✦</span><strong>Selamat membaca!</strong><p>Setiap buku adalah pintu menuju dunia baru.</p></div>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Demo mode <span class="version">v1.0</span></div>
+    </aside>
+
+    <main class="main-content">
+      <section id="page-home" class="page active">
+        <div class="hero">
+          <div class="hero-copy"><div class="eyebrow"><span></span> RUANG BACA DIGITALMU</div><h1>Temukan cerita,<br><em>perluas wawasan.</em></h1><p>Jelajahi koleksi buku digital dari komunitas pembaca.</p><button class="btn btn-white" data-nav="search">Jelajahi koleksi <span>→</span></button></div>
+          <div class="hero-illustration" aria-hidden="true"><div class="hero-orbit"></div><div class="hero-book book-back">📕</div><div class="hero-book book-mid">📗</div><div class="hero-book book-front">📘</div><span class="hero-star">✦</span></div>
+          <div class="hero-decoration">BACA · TEMUKAN · BAGIKAN</div>
+        </div>
+        <div class="section-heading"><div><div class="eyebrow">KOLEKSI PILIHAN</div><h2>Buku untuk dijelajahi <span class="heading-spark">✦</span></h2><p>Siapa tahu kamu menemukan favorit berikutnya.</p></div><button class="text-link" data-nav="search">Lihat semua <span>→</span></button></div>
+        <div id="bookGrid" class="book-grid"></div>
+        <div id="emptyHome" class="empty-state hidden"><span>📚</span><h3>Belum ada buku ditemukan</h3><p>Coba kata pencarian lain atau unggah PDF pertamamu.</p><button class="btn btn-primary" data-nav="upload">Upload buku</button></div>
+      </section>
+
+      <section id="page-search" class="page">
+        <div class="page-heading"><div class="eyebrow">TEMUKAN BACAAN BARU</div><h1>Cari buku</h1><p>Telusuri koleksi berdasarkan judul atau nama penulis.</p></div>
+        <label class="search-large"><span>⌕</span><input id="pageSearch" type="search" placeholder="Contoh: petualangan, sejarah, atau nama penulis..."></label>
+        <div class="results-label" id="searchResultsLabel">Semua koleksi</div><div id="searchGrid" class="book-grid"></div>
+        <div id="emptySearch" class="empty-state hidden"><span>🔎</span><h3>Buku belum ditemukan</h3><p>Coba kata kunci lain.</p></div>
+      </section>
+
+      <section id="page-favorites" class="page">
+        <div class="page-heading"><div class="eyebrow">DISIMPAN KHUSUS UNTUKMU</div><h1>Favorite Books <span class="heading-spark">♡</span></h1><p>Kumpulan buku yang ingin kamu baca lagi nanti.</p></div>
+        <div id="favoritesGrid" class="book-grid"></div>
+        <div id="emptyFavorites" class="empty-state"><span>♡</span><h3>Favoritmu masih kosong</h3><p>Tekan ikon hati di kartu buku untuk menyimpannya di sini.</p><button class="btn btn-primary" data-nav="home">Jelajahi buku</button></div>
+      </section>
+
+      <section id="page-upload" class="page">
+        <div class="page-heading"><div class="eyebrow">BAGIKAN PENGETAHUAN</div><h1>Upload buku PDF</h1><p>Tambahkan buku digital ke koleksi demo ini.</p></div>
+        <form id="uploadForm" class="form-card">
+          <label class="field-label">Judul buku<input id="bookTitle" required maxlength="100" placeholder="Masukkan judul buku"></label>
+          <label class="field-label">Nama penulis<input id="bookAuthor" required maxlength="80" placeholder="Nama penulis"></label>
+          <label class="field-label">Kategori<select id="bookCategory"><option>Umum</option><option>Novel</option><option>Pendidikan</option><option>Sejarah</option><option>Teknologi</option><option>Pengembangan Diri</option><option>Komik</option></select></label>
+          <label class="field-label">Deskripsi buku<textarea id="bookDescription" maxlength="300" rows="3" placeholder="Ceritakan sedikit tentang buku ini (opsional)"></textarea></label>
+          <label class="field-label">File buku <span class="muted">(PDF saja, maksimal 10 MB)</span><input id="bookFile" type="file" accept="application/pdf,.pdf" required></label>
+          <div class="upload-tip"><span>ⓘ</span><p>Unggah hanya buku yang kamu miliki atau punya izin untuk dibagikan. File demo disimpan di browser ini dan tidak diunggah ke internet.</p></div>
+          <button class="btn btn-primary btn-full" type="submit">＋ Tambahkan ke perpustakaan</button>
+          <p id="uploadMessage" class="form-message" role="status"></p>
+        </form>
+      </section>
+
+      <section id="page-profile" class="page">
+        <div class="page-heading"><div class="eyebrow">RUANG PRIBADIMU</div><h1>Profil Saya</h1><p>Atur tampilan profil dan informasi akunmu.</p></div>
+        <div class="profile-card">
+          <div class="profile-banner"></div>
+          <div class="profile-main"><div class="profile-avatar" id="profileAvatar">👤</div><div><h2 id="profileNameDisplay">Pengunjung</h2><p id="profileEmailDisplay">Belum login · Mode demo</p></div><span class="demo-pill">DEMO</span></div>
+          <form id="profileForm" class="profile-form">
+            <label class="field-label">Nama tampilan<input id="profileName" maxlength="40" placeholder="Nama kamu"></label>
+            <label class="field-label">Pilih avatar<select id="profileEmoji"><option value="👤">👤 Default</option><option value="📚">📚 Pecinta buku</option><option value="🦊">🦊 Rubah</option><option value="🐱">🐱 Kucing</option><option value="🐼">🐼 Panda</option><option value="🌻">🌻 Bunga</option><option value="🚀">🚀 Penjelajah</option><option value="🦋">🦋 Kupu-kupu</option></select></label>
+            <button class="btn btn-primary" type="submit">Simpan profil</button>
+          </form>
+          <div class="profile-stats"><div><strong id="profileBookCount">0</strong><span>Buku diunggah</span></div><div><strong id="profileFavoriteCount">0</strong><span>Buku favorit</span></div></div>
+          <div class="account-actions"><h3>Akun demo</h3><p>Daftar atau login untuk mencoba alur akun. Data akun hanya tersimpan di browser ini dan bukan sistem autentikasi sungguhan.</p><div class="account-buttons"><button id="openRegister" class="btn btn-primary">Buat akun demo</button><button id="openLogin" class="btn btn-outline">Login demo</button><button id="logoutBtn" class="btn btn-quiet hidden">Logout</button></div></div>
+        </div>
+      </section>
+
+      <section id="page-reader" class="page">
+        <button class="back-link" data-nav="home">← Kembali ke koleksi</button>
+        <div id="readerContent"></div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="mobile-nav">
+    <button class="active" data-nav="home"><span>⌂</span>Home</button><button data-nav="search"><span>⌕</span>Cari</button><button data-nav="favorites"><span>♡</span>Favorit</button><button data-nav="upload"><span>＋</span>Upload</button><button data-nav="profile"><span>◎</span>Profil</button>
+  </footer>
+
+  <div id="authModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-card"><button id="closeAuth" class="icon-close" aria-label="Tutup">×</button><div class="modal-icon">📚</div><div class="eyebrow">SELAMAT DATANG DI DIGITAL PERPUS</div><h2 id="authTitle">Buat akun demo</h2><p id="authDescription">Daftar untuk mencoba pengalaman membaca.</p>
+      <form id="authForm"><label class="field-label">Nama tampilan<input id="authName" maxlength="40" placeholder="Nama kamu"></label><label class="field-label">Email<input id="authEmail" type="email" required placeholder="nama@email.com"></label><label class="field-label">Kata sandi demo<input id="authPassword" type="password" required minlength="4" placeholder="Minimal 4 karakter"></label><p class="auth-warning">Demo saja: jangan gunakan kata sandi asli. Akun tidak aman untuk penggunaan sungguhan.</p><button class="btn btn-primary btn-full" type="submit" id="authSubmit">Buat akun</button><p id="authMessage" class="form-message" role="status"></p></form>
+      <button id="switchAuth" class="switch-auth">Sudah punya akun? Login</button>
+    </div>
+  </div>
+
+  <div id="noticeToast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
