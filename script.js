@@ -162,7 +162,7 @@
           password,
           options:{
             data:{display_name},
-            emailRedirectTo:"https://fauzanibrahim982-cloud.github.io/fauzzstore/"
+            emailRedirectTo:"https://fauzanibrahim982-cloud.github.io/fauzanstore/"
           }
         });
         if(result.error)throw result.error;
