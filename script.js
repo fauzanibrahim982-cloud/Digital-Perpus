@@ -2,8 +2,8 @@
   "use strict";
   // Paste your Supabase Project URL and publishable/anon key here.
   // Never put a service_role/secret key in browser JavaScript.
-  const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
-  const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_OR_PUBLISHABLE_KEY_HERE";
+  const SUPABASE_URL = 'https://tnqshjfgukmwnikjebfe.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_aE-dagEXDuxWb7FFHYkK5Q_qCyBlomq';
   const BUCKET = "book-pdfs";
   const MAX_PDF_BYTES = 10 * 1024 * 1024;
   const $ = (s, root=document) => root.querySelector(s);
