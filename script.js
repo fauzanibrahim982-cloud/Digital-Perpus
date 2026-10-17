@@ -1,3 +1,4 @@
+
 (() => {
   "use strict";
   // Paste your Supabase Project URL and publishable/anon key here.
@@ -156,7 +157,14 @@
       let result;
       if(authMode==="register") {
         const display_name=$("#authName").value.trim()||email.split("@")[0];
-        result=await supabase.auth.signUp({email,password,options:{data:{display_name}}});
+        result=await supabase.auth.signUp({
+          email,
+          password,
+          options:{
+            data:{display_name},
+            emailRedirectTo:"https://fauzanibrahim982-cloud.github.io/fauzzstore/"
+          }
+        });
         if(result.error)throw result.error;
         if(result.data.session) {
           currentUser=result.data.user;
